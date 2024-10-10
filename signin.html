@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css\signin.css">
+    <title>Sign in to AR-APSIT</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(to right, #7b1fa2, #4a148c);
+            position: relative;
+        }
+        
+        .container {
+            width: 350px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-container {
+            text-align: center;
+        }
+        
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        
+        #para {
+            font-size: 2.5rem;
+            font-weight: bolder;
+            background: -webkit-linear-gradient(#0b7ad5, #f17807);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        
+        #h3 {
+            margin-bottom: 30px;
+            color: #333333;
+            font-weight: 600;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form label {
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        form input:focus {
+            border: 1px solid #7b1fa2;
+            outline: none;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #6a1b9a;
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .continue-btn:hover {
+            background-color: #8e24aa;
+            transform: translateY(-2px);
+        }
+        
+        #guest-user-btn {
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        #guest-user-btn:hover {
+            background-color: #bdbdbd;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #666666;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #7b1fa2;
+        }
+        
+        /* Background Animation */
+        @keyframes backgroundAnimation {
+            0% {
+                background-color: #7b1fa2;
+            }
+            50% {
+                background-color: #4a148c;
+            }
+            100% {
+                background-color: #7b1fa2;
+            }
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #7b1fa2, #4a148c);
+            animation: backgroundAnimation 8s ease infinite;
+            z-index: -1;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <img src="ar.png" alt="Logo" class="logo">
+            <strong>
+                <p id="para">AR-APSIT</p>
+            </strong>
+            <h3 id="h3">Student Login</h3>
+
+            <form id="signin-form">
+                <label for="moodleid">Moodle Id:</label>
+                <input type="text" id="moodleid" name="moodleid" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <!-- Continue Button for Authenticated User -->
+                <button type="submit" class="continue-btn">Continue</button>
+                <p>OR</p>
+
+                <!-- Guest User Button -->
+                <button type="button" id="guest-user-btn">Guest User</button>
+
+            </form>
+
+            <div id="error-message" style="color: red;"></div> <!-- Error message display -->
+        </div>
+        <footer>
+            <p>&copy; 2024 AR-APSIT</p>
+            <div class="footer-links">
+                <a href="#">Support</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Add event listener for Guest User button
+        document.getElementById('guest-user-btn').addEventListener('click', function () {
+            // Redirect to dashboard page as a guest
+            window.localStorage.removeItem("session"); // Ensure no session for guest users
+            window.location.href = 'dashboard.html'; // Redirect to dashboard
+        });
+
+        document.getElementById('signin-form').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log('Form is being submitted'); // Debugging log
+
+            // Get values from the form fields
+            const moodleid = document.getElementById('moodleid').value.trim(); // Trim whitespace
+            const password = document.getElementById('password').value.trim(); // Trim whitespace
+
+            // Debugging logs to check values
+            console.log('MoodleId:', moodleid);
+            console.log('Password:', password);
+
+            // Check if both fields are filled
+            if (!moodleid.length || !password.length) {
+                console.error('MoodleId or password field is missing in the form.');
+                document.getElementById('error-message').innerText = 'Please fill in both fields.';
+                return; // Exit the function if fields are missing
+            }
+
+            try {
+                const response = await fetch('https://ar-navigation-website.onrender.com/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ moodleid, password }),
+                    credentials: 'include' // Important for sending cookies
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    window.localStorage.setItem("session", true); // Store user session in localStorage
+                    window.location.href = 'dashboard.html'; // Redirect on successful login
+                } else {
+                    console.error(result.message);
+                    document.getElementById('error-message').innerText = result.message; // Show error message to the user
+                }
+
+            } catch (error) {
+                console.error('Error during login:', error);
+                document.getElementById('error-message').innerText = 'An error occurred during login. Please try again.'; // General error message
+            }
+        });
+    </script>
+</body>
+
+</html>
