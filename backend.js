@@ -4,21 +4,26 @@ const { Pool } = require('pg'); // Use pg for PostgreSQL
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-
 const app = express();
-
 const cors = require('cors');
 
-const allowedOrigins = ['https://apsitarnav-website.onrender.com'];
+const allowedOrigins = ['https://apsitarnav-website.onrender.com', 'https://ar-navigation-website.onrender.com'];
 
 app.use(cors({
-    origin: allowedOrigins,
-    credentials: true,
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Allow cookies and headers
+    methods: ['GET', 'POST', 'OPTIONS'], // Allow preflight OPTIONS method
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow the headers you're using
 }));
 
-// Preflight support for all routes
-app.options('*', cors());
 
+app.options('*', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
