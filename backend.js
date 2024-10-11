@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 
 // Allow multiple origins (localhost for development, and Vercel for production)
-const allowedOrigins = ['https://ar-navigation-website.onrender.com'];
+const allowedOrigins = ['https://apsitarnav-website.onrender.com'];
 
 app.use(cors({
     origin: (origin, callback) => {
