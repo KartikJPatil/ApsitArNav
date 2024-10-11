@@ -4,8 +4,8 @@ const { Pool } = require('pg'); // Use pg for PostgreSQL
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+
 const app = express();
-const cors = require('cors');
 
 const allowedOrigins = ['https://apsitarnav-website.onrender.com', 'https://ar-navigation-website.onrender.com'];
 
@@ -21,7 +21,6 @@ app.use(cors({
     methods: ['GET', 'POST', 'OPTIONS'], // Allow preflight OPTIONS method
     allowedHeaders: ['Content-Type', 'Authorization'] // Allow the headers you're using
 }));
-
 
 app.options('*', cors());
 app.use(bodyParser.json());
@@ -61,7 +60,7 @@ pool.connect((err) => {
 
 // Login Route
 app.post('/login', (req, res) => {
-    const { moodleid, password } = req.body;
+    const { moodleid, password } = req.body; // Ensure this matches your input names
 
     if (!moodleid || !password) {
         return res.json({ success: false, message: 'moodleid and password are required' });
