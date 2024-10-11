@@ -9,7 +9,7 @@ const app = express();
 
 const cors = require('cors');
 
-const allowedOrigins = ['https://apsitarnav-website.onrender.com', 'https://ar-navigation-website.onrender.com'];
+const allowedOrigins = ['https://apsitarnav-website.onrender.com'];
 
 app.use(cors({
     origin: allowedOrigins,
