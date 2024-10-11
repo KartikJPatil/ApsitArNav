@@ -11,15 +11,12 @@ const app = express();
 const allowedOrigins = ['https://apsitarnav-website.onrender.com'];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: 'https://apsitarnav-website.onrender.com', // Explicitly allow your frontend
     credentials: true, // Allow credentials (cookies, headers, etc.)
+    methods: ['GET', 'POST', 'OPTIONS'], // Ensure the server accepts preflight requests
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow the headers you are sending
 }));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
