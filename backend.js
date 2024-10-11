@@ -7,17 +7,23 @@ const path = require('path');
 
 const app = express();
 
-// Allow multiple origins (localhost for development, and Vercel for production)
-const allowedOrigins = ['https://apsitarnav-website.onrender.com'];
+const allowedOrigins = ['https://apsitarnav-website.onrender.com', 'https://ar-navigation-website.onrender.com'];
 
 app.use(cors({
-    origin: 'https://apsitarnav-website.onrender.com', // Explicitly allow your frontend
-    credentials: true, // Allow credentials (cookies, headers, etc.)
-    methods: ['GET', 'POST', 'OPTIONS'], // Ensure the server accepts preflight requests
-    allowedHeaders: ['Content-Type', 'Authorization'] // Allow the headers you are sending
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Allow cookies and headers
+    methods: ['GET', 'POST', 'OPTIONS'], // Allow preflight OPTIONS method
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow the headers you're using
 }));
 
 
+app.options('*', cors()); // Enable preflight requests for all routes
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
