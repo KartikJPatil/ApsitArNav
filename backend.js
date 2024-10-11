@@ -1,33 +1,31 @@
 const express = require('express');
 const session = require('express-session');
-const { Pool } = require('pg'); // Use pg for PostgreSQL
+const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
 
-const allowedOrigins = ['https://apsitarnav-website.onrender.com', 'https://ar-navigation-website.onrender.com'];
+const allowedOrigins = [
+    'https://apsitarnav-website.onrender.com',
+];
 
+// CORS Configuration
 app.use(cors({
-    origin: (origin, callback) => {
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: allowedOrigins,
     credentials: true, // Allow cookies and headers
     methods: ['GET', 'POST', 'OPTIONS'], // Allow preflight OPTIONS method
     allowedHeaders: ['Content-Type', 'Authorization'] // Allow the headers you're using
 }));
 
-app.options('*', cors());
+app.options('*', cors()); // Enable pre-flight requests for all routes
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
-// Set up session middleware with secure options
+// Set up session middleware
 app.use(session({
     secret: 'your_secret_key', // Use an environment variable in production
     resave: false,
@@ -45,11 +43,13 @@ const pool = new Pool({
     user: 'arcredentials_user',
     password: 'YaCDakA5ojzAdDPGpNWUu4H7NYXUp4Vj',
     database: 'arcredentials',
-    port: 5432,  // Default PostgreSQL port, change if necessary
-    ssl: false  // Set to true if using SSL for DB
+    port: 5432,
+    ssl: {
+        rejectUnauthorized: false // Set to true if you have valid SSL certificates
+    }
 });
 
-// Connect to the database and verify connection
+// Connect to the database
 pool.connect((err) => {
     if (err) {
         console.error('Error connecting to the database:', err);
@@ -66,7 +66,6 @@ app.post('/login', (req, res) => {
         return res.json({ success: false, message: 'moodleid and password are required' });
     }
 
-    // Query to find the user with encrypted password
     const query = 'SELECT * FROM users WHERE "moodleid" = $1 AND "password" = crypt($2, "password")';
     
     pool.query(query, [moodleid, password], (err, result) => {
