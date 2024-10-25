@@ -153,90 +153,7 @@
             padding: 20px;
         }
 
-        /* Chatbot Styles */
-        .chatbot-container {
-            border-radius: 10px;
-            background-color: #fff;
-            color: #333;
-            width: 350px;
-            position: fixed;
-            bottom: 25px;
-            right: 80px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-
-        .chat-header {
-            background-color: #00b4d8;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-btn {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .chat-body {
-            background-color: #fff;
-            height: 300px;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .chat-messages {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .chat {
-            display: flex;
-            margin-bottom: 10px;
-        }
-
-        .outgoing {
-            justify-content: flex-end;
-        }
-
-        .outgoing p {
-            background-color: #00b4d8;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 8px;
-            max-width: 70%;
-        }
-
-        .incoming {
-            justify-content: flex-start;
-        }
-
-        .chat-footer {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-        }
-
-        #user-message {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-        #send-btn {
-            padding: 8px 12px;
-            background-color: #00b4d8;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
+       
         /* FAQ Section */
         #faq {
             background: #1e1e2f;
@@ -367,58 +284,34 @@
             display: flex;
             flex-direction: column;
         }
-
+        
+        
         .chat-header {
             background-color: #007bff;
             color: #fff;
-            padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .close-btn {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
+        
         .chat-body {
             flex-grow: 1;
             overflow-y: auto;
-            max-height: calc(80vh - 120px); /* Adjust based on header and footer height */
+            max-height: calc(80vh - 120px);
+            background-color: #fff;
+            height: 300px;
+            padding: 10px;
         }
-    
-        @media (max-width: 576px) {
-            .chatbot-container {
-                width: 90%;
-                max-width: none;
-                left: 5%;
-                right: 5%;
-                bottom: 70px;
-            }
-    
-            .toggle-btn {
-                bottom: 20px;
-                right: 20px;
-            }
-        }
-
-        .chat-messages {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            color: black
-        }
-
+        
         .chat {
             display: flex;
             margin-bottom: 10px;
         }
-
+        
         .outgoing {
             justify-content: flex-end;
         }
-
+        
         .outgoing p {
             background-color: #007bff;
             color: #fff;
@@ -426,11 +319,11 @@
             border-radius: 8px;
             max-width: 70%;
         }
-
+        
         .incoming {
             justify-content: flex-start;
         }
-
+        
         .incoming p {
             background-color: #f0f0f0;
             padding: 8px 12px;
@@ -438,18 +331,48 @@
             max-width: 70%;
             color: black;
         }
-
+        
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        #user-message {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        
+        #send-btn {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .chat-messages {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: black;
+        }
+        
         .recommended-topics {
             margin-top: 10px;
         }
-
+        
         .recommended-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: black;
         }
-
+        
         .refresh-icon {
             cursor: pointer;
             background: none;
@@ -458,19 +381,18 @@
             color: #007bff;
             padding: 0;
         }
-
+        
         .refresh-icon:hover {
             color: #0056b3;
         }
-
+        
         #recommended-questions {
             list-style: none;
             padding: 0;
             margin: 5px 0 0;
             color: black;
-            ;
         }
-
+        
         #recommended-questions li {
             padding: 8px;
             margin: 5px 0;
@@ -482,33 +404,26 @@
             justify-content: space-between;
             align-items: center;
         }
-
+        
         #recommended-questions li:hover {
             background-color: #e9ecef;
         }
-
-        .chat-footer {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
+        
+        @media (max-width: 576px) {
+            .chatbot-container {
+                width: 90%;
+                max-width: none;
+                left: 5%;
+                right: 5%;
+                bottom: 70px;
+            }
+            
+            .toggle-btn {
+                bottom: 20px;
+                right: 20px;
+            }
         }
-
-        #user-message {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-        #send-btn {
-            padding: 8px 12px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+        
 
         #send-btn:hover {
             background-color: #0056b3;
@@ -654,7 +569,6 @@
         <div class="chatbot-container" id="chatbot-container" style="display: none;">
             <div class="chat-header">
                 <h2>AR ChatBot</h2>
-                <span class="close-btn" id="close-btn">&times;</span>
             </div>
             <div class="chat-body">
                 <ul id="chatbox" class="chat-messages"></ul>
@@ -664,7 +578,7 @@
                         <button id="refresh-btn" class="refresh-icon">&#x21bb;</button>
                     </div>
                     <ul id="recommended-questions">
-                        <!-- Initial questions will be populated by JavaScript -->
+                        <!-- Questions will be populated here by JavaScript -->
                     </ul>
                 </div>
             </div>
@@ -912,15 +826,33 @@
         const refreshBtn = document.getElementById("refresh-btn");
 
         const questionsSet = [
-            ["How to start navigation", "nearest restrooms", "find the main entrance"],
-            ["time to reach my destination", "way to the cafeteria", "shortcut to the library"],
-            ["is there an elevator nearby", "help finding the conference room", "landmarks near me"],
+            "Where is the canteen?",
+            "Where can I find the stationary shop?",
+            "Where is the IT faculty room?",
+            "How do I reach the hardware workshop?",
+            "Where is the cafeteria located?",
+            "Where are the nearest restrooms?",
+            "Where is the IT Head's room?",
+            "How do I find the main entrance?",
+            "Is there an elevator nearby?",
+            "How can I reach the library?",
+            "Where is the seminar hall?",
+            "How do I get to the reception?",
+            "Where is the principal's office?",
+            "Where can I find boys' common room?",
+            "How do I reach the physics lab?",
+            "Where is room 304b?",
+            "How can I reach the examination cell?",
+            "Where is the music room?",
+            "How do I access Wi-Fi on campus?",
+            "Where is the outdoor seating area?"
         ];
 
         const renderQuestions = () => {
             recommendedQuestions.innerHTML = "";
-            const randomSet = questionsSet[Math.floor(Math.random() * questionsSet.length)];
-            randomSet.forEach((question) => {
+            const shuffled = [...questionsSet].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 3);
+            selected.forEach((question) => {
                 const listItem = document.createElement("li");
                 listItem.textContent = question;
                 listItem.addEventListener("click", () => sendMessage(question));
@@ -951,26 +883,51 @@
 
         const generateBotResponse = (message) => {
             const responses = {
-                "start navigation":
-                    "To start navigation, please enter your current location and your destination.",
-                "nearest restrooms":
-                    "Sure! Please allow me access to your current location, and I'll show you the nearest restrooms.",
-                "find the main entrance":
-                    "The main entrance is marked with a large blue arrow in the AR view. Just follow the arrow to reach the main entrance.",
-                "landmarks near me":
-                    "I can help with that! Let me access your location to show nearby landmarks on your AR view.",
-                "time to reach my destination":
-                    "Based on your current location and the destination, it should take approximately 10 minutes on foot.",
-                "shortcut to the library":
-                    "Yes, there is a shortcut. Follow the highlighted path in your AR view to take the quickest route to the library.",
-                "way to the cafeteria":
-                    "Sure! Follow the green path in your AR view to reach the cafeteria.",
-                "help finding the conference room":
-                    "No problem! Just enter the name or number of the conference room, and I will guide you there.",
-                "is there an elevator nearby":
-                    "Yes, there's an elevator close to you. Follow the yellow path in your AR view to reach it.",
+                hello: "Hello! How can I assist you today?",
+                "where is the canteen?":
+                    "Navigate to the ground floor, enter your current location, and select 'Canteen' as your destination.",
+                "where can i find the stationary shop?":
+                    "Go to the ground floor, input your location, and choose 'Stationary' as your destination.",
+                "where is the it faculty room?":
+                    "Select your current location and set '304D (IT Faculty Room)' as your destination.",
+                "how do i reach the hardware workshop for first-year students?":
+                    "Head to the basement or parking area, enter your location, and mark 'Workshop-1' as your destination.",
+                "where is the cafeteria located?":
+                    "Set your destination to 'Cafeteria-1/-2' and follow the provided directions.",
+                "where are the nearest restrooms?":
+                    "Mark 'Restroom' as your destination and follow the directions provided.",
+                "where is the it head of department's room?":
+                    "Scan for the nearest room, select '318D' as your destination, and follow the blue arrow.",
+                "how do i find the main entrance?":
+                    "The main entrance is indicated by a blue arrow.",
+                "is there an elevator nearby?":
+                    "Select the elevator option and follow the blue path to locate the nearest elevator.",
+                "how can i reach the library?":
+                    "Enter your current location and set your destination to 'Library,' then follow the arrow.",
+                "where is the seminar hall?":
+                    "Select your destination and click the start button to follow the designated path.",
+                "how do i get to the reception?":
+                    "Mark 'Reception' as your destination and follow the path outlined.",
+                "where is the principal room?":
+                    "Set your destination to 'Principal Room,' click the start button, and follow the designated path.",
+                "where can i find boys' common room?":
+                    "Enter your starting location and set the destination to 'Boys' Common Room,' then follow the path.",
+                "how do i reach the physics lab?":
+                    "Scan for the nearest room, select 'Physics Lab,' and follow the blue arrow.",
+                "where is room 304b?":
+                    "Scan for the nearest room, select '304B,' and follow the blue arrow.",
+                "how can i reach the examination cell?":
+                    "Enter your current location, mark 'Examination Cell' as your destination, and follow the arrow.",
+                "where is the music room?":
+                    "Enter your current location, set your destination to 'Music Room,' and follow the provided path.",
+                "how do i report an issue or provide feedback?":
+                    "You can report issues or provide feedback at the reception desk or by using the feedback form available on the website.",
+                "how do i access wi-fi on campus?":
+                    "Wi-Fi is available throughout the campus. Connect to the network 'Campus Wi-Fi' and use your student credentials to log in.",
+                "where is the outdoor seating area?":
+                    "The outdoor seating area is located in front of the ground floor cafeteria. Follow the path marked 'Cafeteria 2.'",
             };
-            return responses[message] || "Sorry, I do not have information on that topic.";
+            return responses[message.toLowerCase()] || "Please visit the Reception";
         };
 
         sendBtn.addEventListener("click", () => {
@@ -987,7 +944,12 @@
         });
 
         chatbotToggler.addEventListener("click", () => {
-            chatbotContainer.style.display = chatbotContainer.style.display === "none" ? "block" : "none";
+            if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
+                chatbotContainer.style.display = "flex";
+                renderQuestions(); // Add this line
+            } else {
+                chatbotContainer.style.display = "none";
+            }
         });
 
         closeBtn.addEventListener("click", () => {
@@ -1072,6 +1034,22 @@
                 }
             });
         });
+
+        // Add this code after the existing chatbot functionality code
+
+        const chatBody = document.querySelector('.chat-body');
+
+        chatBody.addEventListener('wheel', (e) => {
+            const { scrollTop, scrollHeight, clientHeight } = chatBody;
+            
+            // Check if we're at the top or bottom of the chat body
+            if (
+                (scrollTop === 0 && e.deltaY < 0) || 
+                (scrollTop + clientHeight >= scrollHeight && e.deltaY > 0)
+            ) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 
 </body>
