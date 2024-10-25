@@ -37,7 +37,7 @@
                 padding-left: .5rem;
             }
         }
-        
+
         nav.navbar a.nav-link,
         nav.navbar a.navbar-brand {
             color: #f4f4f9;
@@ -72,6 +72,7 @@
             text-align: center;
             overflow: hidden;
             height: 100vh;
+            z-index: 1;
         }
 
         section#hero::before {
@@ -99,6 +100,21 @@
         .hero-content {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         /* Features Section */
@@ -335,6 +351,7 @@
             position: fixed;
             bottom: 25px;
             right: 10px;
+            z-index: 1000;
         }
 
         .toggle-btn:hover {
@@ -351,6 +368,7 @@
             position: fixed;
             bottom: 25px;
             right: 80px;
+            z-index: 1001;
         }
 
         .chat-header {
@@ -498,6 +516,36 @@
         .social-icons a:hover {
             color: #f0ad4e;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in {
+            animation: slideInFromBottom 0.5s ease-out;
+        }
     </style>
 </head>
 
@@ -530,7 +578,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
                         <a class="dropdown-item" href="#">Tutorials</a>
-                        <a class="dropdown-item" href="#" onclick="scrollToFeedback()" >Feedback</a>
+                        <a class="dropdown-item" href="#" onclick="scrollToFeedback()">Feedback</a>
                         <a class="dropdown-item" href="#" onclick="scrollToFaq()">FAQ</a>
                     </div>
                 </li>
@@ -548,7 +596,7 @@
             <source src="homepage.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
-        <div class="hero-content">
+        <div class="hero-content fade-in">
             <h1>AR APSIT</h1>
             <p>Revolutionizing navigation within APSIT using AR technology</p>
             <a href="#" class="btn btn-light mt-4" onclick="scrollToFeatures()">Get Started</a>
@@ -994,6 +1042,24 @@
                 });
         }
 
+        // Updated FAQ toggle functionality
+        $(document).ready(function () {
+            $('#faqAccordion').on('show.bs.collapse', function (e) {
+                $(e.target).prev('.card-header').find('.btn-link').addClass('active');
+            });
+
+            $('#faqAccordion').on('hide.bs.collapse', function (e) {
+                $(e.target).prev('.card-header').find('.btn-link').removeClass('active');
+            });
+
+            $('.btn-link').on('click', function (e) {
+                if ($(this).hasClass('active')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $($(this).data('target')).collapse('hide');
+                }
+            });
+        });
     </script>
 
 </body>
