@@ -51,7 +51,7 @@
         }
 
         .navbar-toggler {
-            border-color: rgba(255,255,255,.5);
+            border-color: rgba(255, 255, 255, .5);
         }
 
         .navbar-toggler-icon {
@@ -512,13 +512,22 @@
                 padding: 10px;
                 z-index: 1000;
             }
+
             #navbarNav.show {
                 display: block !important;
             }
+
             .dropdown-menu {
+                display: none;
                 background-color: transparent;
                 border: none;
+                padding-left: 15px;
             }
+
+            .dropdown-menu.show {
+                display: block;
+            }
+
             .dropdown-item {
                 color: #f4f4f9;
             }
@@ -1076,43 +1085,51 @@
                 });
             }
 
-            // Add this inside your $(document).ready(function() { ... });
-            $('.navbar-nav>li>a').on('click', function(){
-                $('.navbar-collapse').collapse('hide');
-            });
-
-            $('.dropdown-menu a').on('click', function(){
-                $('.navbar-collapse').collapse('hide');
-            });
-
-            // Navbar toggle functionality
-            $('.navbar-toggler').on('click', function(e) {
-                e.stopPropagation(); // Prevent event from bubbling up
-                $('#navbarNav').toggleClass('show');
-            });
-
-            // Close navbar when clicking outside
-            $(document).on('click', function(event) {
-                var clickover = $(event.target);
-                var _opened = $('#navbarNav').hasClass('show');
-                if (_opened === true && !clickover.hasClass('navbar-toggler') && !clickover.closest('#navbarNav').length) {
-                    $('#navbarNav').removeClass('show');
-                }
-            });
-
-            // Close navbar when a nav item is clicked
-            $('.nav-link, .dropdown-item').on('click', function() {
-                $('#navbarNav').removeClass('show');
-            });
-
-            // Prevent dropdown from closing immediately on mobile
-            $('.dropdown-toggle').on('click', function(e) {
-                if ($(window).width() < 992) {
-                    e.preventDefault();
+            $(document).ready(function() {
+                // Navbar toggle functionality for small screens
+                $('.navbar-toggler').on('click', function(e) {
                     e.stopPropagation();
-                    $(this).next('.dropdown-menu').toggleClass('show');
-                }
+                    $('#navbarNav').toggleClass('show');
+                });
+            
+                // Toggle dropdowns inside navbar on click without collapsing the whole menu
+                $('.dropdown-toggle').on('click', function(e) {
+                    if ($(window).width() < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const $dropdownMenu = $(this).next('.dropdown-menu');
+                        $dropdownMenu.toggleClass('show');
+            
+                        // Close other open dropdowns
+                        $('.dropdown-menu').not($dropdownMenu).removeClass('show');
+                    }
+                });
+            
+                // Close navbar and dropdown menus when clicking outside
+                $(document).on('click', function(event) {
+                    const $navbar = $('#navbarNav');
+                    const $toggler = $('.navbar-toggler');
+                    if (!$(event.target).closest('#navbarNav').length && 
+                        !$(event.target).is($toggler) && 
+                        $navbar.hasClass('show')) {
+                        $navbar.removeClass('show');
+                        $('.dropdown-menu').removeClass('show');
+                    }
+                });
+            
+                // Prevent dropdowns from closing when clicking inside them
+                $('.dropdown-menu').on('click', function(e) {
+                    e.stopPropagation();
+                });
+            
+                // Close navbar only when clicking a non-dropdown nav item
+                $('.nav-item:not(.dropdown) .nav-link').on('click', function() {
+                    if ($(window).width() < 992) {
+                        $('#navbarNav').removeClass('show');
+                    }
+                });
             });
+            
         });
     </script>
 
