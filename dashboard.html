@@ -38,7 +38,7 @@
             }
         }
 
-        
+
 
         nav.navbar a.nav-link,
         nav.navbar a.navbar-brand {
@@ -153,7 +153,7 @@
             padding: 20px;
         }
 
-       
+
         /* FAQ Section */
         #faq {
             background: #1e1e2f;
@@ -284,8 +284,8 @@
             display: flex;
             flex-direction: column;
         }
-        
-        
+
+
         .chat-header {
             background-color: #007bff;
             color: #fff;
@@ -293,7 +293,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .chat-body {
             flex-grow: 1;
             overflow-y: auto;
@@ -302,16 +302,16 @@
             height: 300px;
             padding: 10px;
         }
-        
+
         .chat {
             display: flex;
             margin-bottom: 10px;
         }
-        
+
         .outgoing {
             justify-content: flex-end;
         }
-        
+
         .outgoing p {
             background-color: #007bff;
             color: #fff;
@@ -319,11 +319,11 @@
             border-radius: 8px;
             max-width: 70%;
         }
-        
+
         .incoming {
             justify-content: flex-start;
         }
-        
+
         .incoming p {
             background-color: #f0f0f0;
             padding: 8px 12px;
@@ -331,14 +331,14 @@
             max-width: 70%;
             color: black;
         }
-        
+
         .chat-footer {
             display: flex;
             padding: 10px;
             border-top: 1px solid #007bff;
             background-color: #007bff;
         }
-        
+
         #user-message {
             flex: 1;
             padding: 8px;
@@ -346,7 +346,7 @@
             border-radius: 4px;
             margin-right: 5px;
         }
-        
+
         #send-btn {
             padding: 8px 12px;
             background-color: #0056b3;
@@ -355,29 +355,29 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
+
         #send-btn:hover {
             background-color: #003d82;
         }
-        
+
         .chat-messages {
             list-style: none;
             padding: 0;
             margin: 0;
             color: black;
         }
-        
+
         .recommended-topics {
             margin-top: 10px;
         }
-        
+
         .recommended-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: black;
         }
-        
+
         .refresh-icon {
             cursor: pointer;
             background: none;
@@ -386,18 +386,18 @@
             color: #007bff;
             padding: 0;
         }
-        
+
         .refresh-icon:hover {
             color: #0056b3;
         }
-        
+
         #recommended-questions {
             list-style: none;
             padding: 0;
             margin: 5px 0 0;
             color: black;
         }
-        
+
         #recommended-questions li {
             padding: 8px;
             margin: 5px 0;
@@ -409,11 +409,11 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         #recommended-questions li:hover {
             background-color: #e9ecef;
         }
-        
+
         @media (max-width: 576px) {
             .chatbot-container {
                 width: 90%;
@@ -422,13 +422,13 @@
                 right: 5%;
                 bottom: 70px;
             }
-            
+
             .toggle-btn {
                 bottom: 20px;
                 right: 20px;
             }
         }
-        
+
 
         #send-btn:hover {
             background-color: #0056b3;
@@ -477,6 +477,18 @@
 
         .slide-in {
             animation: slideInFromBottom 0.5s ease-out;
+        }
+
+        .collapse {
+            display: none;
+        }
+
+        .collapse.show {
+            display: block;
+        }
+
+        .card-header .btn-link.active {
+            color: #007bff;
         }
     </style>
 </head>
@@ -606,8 +618,7 @@
                     <div class="card-header p-0" id="headingOne"
                         style="border-left: 4px solid #007bff; background-color: #f1f1f1;">
                         <h3 class="mb-0">
-                            <button
-                                class="btn btn-link btn-block text-left text-dark font-weight-bold py-3 px-4 collapsed"
+                            <button class="btn btn-link btn-block text-left text-dark font-weight-bold py-3 px-4"
                                 type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
                                 aria-controls="collapseOne" style="text-decoration: none;">
                                 Q1: What is the AR-APSIT navigation system?
@@ -783,278 +794,287 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
     <script>
-        // Authentication Check
-        const session = window.localStorage.getItem("session");
-
-        if (session) {
-            document.getElementById('wiki-feature').style.display = 'block'; // Show APSIT-Wiki if authenticated
-            document.getElementById('logout-btn').style.display = 'block';   // Show logout button
-            document.getElementById('profile-btn').style.display = 'none';   // Hide "Student Login"
-        } else {
-            document.getElementById('wiki-feature').style.display = 'none'; // Hide APSIT-Wiki if not authenticated
-            document.getElementById('logout-btn').style.display = 'none';   // Hide logout button
-            document.getElementById('profile-btn').style.display = 'block'; // Show "Student Login"
-        }
-
-        // Logout Function
-        function logout() {
-            window.localStorage.removeItem("session");
-            window.location.href = "signin.html";
-        }
-
-        // Smooth Scroll Functions
-        function scrollToFeatures() {
-            document.getElementById("features").scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-
-        function scrollToFaq() {
-            document.getElementById("faq1").scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-
-        function scrollToFeedback() {
-            document.getElementById("feedback-form").scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-
-        // Chatbot Functionality
-        const chatbotContainer = document.getElementById("chatbot-container");
-        const chatbotToggler = document.getElementById("chatbot-toggler");
-        const closeBtn = document.getElementById("close-btn");
-        const chatbox = document.getElementById("chatbox");
-        const userMessageElement = document.getElementById("user-message");
-        const sendBtn = document.getElementById("send-btn");
-        const recommendedQuestions = document.getElementById("recommended-questions");
-        const refreshBtn = document.getElementById("refresh-btn");
-
-        const questionsSet = [
-            "Where is the canteen?",
-            "Where can I find the stationary shop?",
-            "Where is the IT faculty room?",
-            "How do I reach the hardware workshop?",
-            "Where is the cafeteria located?",
-            "Where are the nearest restrooms?",
-            "Where is the IT Head's room?",
-            "How do I find the main entrance?",
-            "Is there an elevator nearby?",
-            "How can I reach the library?",
-            "Where is the seminar hall?",
-            "How do I get to the reception?",
-            "Where is the principal's office?",
-            "Where can I find boys' common room?",
-            "How do I reach the physics lab?",
-            "Where is room 304b?",
-            "How can I reach the examination cell?",
-            "Where is the music room?",
-            "How do I access Wi-Fi on campus?",
-            "Where is the outdoor seating area?"
-        ];
-
-        const renderQuestions = () => {
-            recommendedQuestions.innerHTML = "";
-            const shuffled = [...questionsSet].sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, 3);
-            selected.forEach((question) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = question;
-                listItem.addEventListener("click", () => sendMessage(question));
-                recommendedQuestions.appendChild(listItem);
-            });
-        };
-
-        const sendMessage = (message) => {
-            if (!message) return;
-
-            const outgoingChat = document.createElement("li");
-            outgoingChat.classList.add("chat", "outgoing");
-            outgoingChat.innerHTML = `<p>${message}</p>`;
-            chatbox.appendChild(outgoingChat);
-
-            const incomingChat = document.createElement("li");
-            incomingChat.classList.add("chat", "incoming");
-            incomingChat.innerHTML = `<p>Let me check that for you...</p>`;
-            chatbox.appendChild(incomingChat);
-
-            chatbox.scrollTop = chatbox.scrollHeight;
-
-            setTimeout(() => {
-                const botResponse = generateBotResponse(message.toLowerCase());
-                incomingChat.querySelector("p").textContent = botResponse;
-            }, 1000);
-        };
-
-        const generateBotResponse = (message) => {
-            const responses = {
-                hello: "Hello! How can I assist you today?",
-                "where is the canteen?":
-                    "Navigate to the ground floor, enter your current location, and select 'Canteen' as your destination.",
-                "where can i find the stationary shop?":
-                    "Go to the ground floor, input your location, and choose 'Stationary' as your destination.",
-                "where is the it faculty room?":
-                    "Select your current location and set '304D (IT Faculty Room)' as your destination.",
-                "how do i reach the hardware workshop for first-year students?":
-                    "Head to the basement or parking area, enter your location, and mark 'Workshop-1' as your destination.",
-                "where is the cafeteria located?":
-                    "Set your destination to 'Cafeteria-1/-2' and follow the provided directions.",
-                "where are the nearest restrooms?":
-                    "Mark 'Restroom' as your destination and follow the directions provided.",
-                "where is the it head of department's room?":
-                    "Scan for the nearest room, select '318D' as your destination, and follow the blue arrow.",
-                "how do i find the main entrance?":
-                    "The main entrance is indicated by a blue arrow.",
-                "is there an elevator nearby?":
-                    "Select the elevator option and follow the blue path to locate the nearest elevator.",
-                "how can i reach the library?":
-                    "Enter your current location and set your destination to 'Library,' then follow the arrow.",
-                "where is the seminar hall?":
-                    "Select your destination and click the start button to follow the designated path.",
-                "how do i get to the reception?":
-                    "Mark 'Reception' as your destination and follow the path outlined.",
-                "where is the principal room?":
-                    "Set your destination to 'Principal Room,' click the start button, and follow the designated path.",
-                "where can i find boys' common room?":
-                    "Enter your starting location and set the destination to 'Boys' Common Room,' then follow the path.",
-                "how do i reach the physics lab?":
-                    "Scan for the nearest room, select 'Physics Lab,' and follow the blue arrow.",
-                "where is room 304b?":
-                    "Scan for the nearest room, select '304B,' and follow the blue arrow.",
-                "how can i reach the examination cell?":
-                    "Enter your current location, mark 'Examination Cell' as your destination, and follow the arrow.",
-                "where is the music room?":
-                    "Enter your current location, set your destination to 'Music Room,' and follow the provided path.",
-                "how do i report an issue or provide feedback?":
-                    "You can report issues or provide feedback at the reception desk or by using the feedback form available on the website.",
-                "how do i access wi-fi on campus?":
-                    "Wi-Fi is available throughout the campus. Connect to the network 'Campus Wi-Fi' and use your student credentials to log in.",
-                "where is the outdoor seating area?":
-                    "The outdoor seating area is located in front of the ground floor cafeteria. Follow the path marked 'Cafeteria 2.'",
-            };
-            return responses[message.toLowerCase()] || "Please visit the Reception";
-        };
-
-        sendBtn.addEventListener("click", () => {
-            const userMessage = userMessageElement.value.trim();
-            sendMessage(userMessage);
-            userMessageElement.value = "";
-        });
-
-        userMessageElement.addEventListener("keypress", (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                sendBtn.click();
-            }
-        });
-
-        chatbotToggler.addEventListener("click", () => {
-            if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
-                chatbotContainer.style.display = "flex";
-                renderQuestions(); // Add this line
-            } else {
-                chatbotContainer.style.display = "none";
-            }
-        });
-
-        closeBtn.addEventListener("click", () => {
-            chatbotContainer.style.display = "none";
-        });
-
-        refreshBtn.addEventListener("click", renderQuestions);
-
-        renderQuestions();
-
-        // Feedback Form Handling
-        const feedbackForm = document.getElementById('feedback-form');
-        const feedbackMessage = document.getElementById('feedback-message');
-
-        feedbackForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const feedbackType = document.getElementById('feedback-type').value;
-            const feedbackText = document.getElementById('feedback').value.trim();
-            const rating = document.getElementById('rating').value;
-
-            if (name && email && feedbackType && feedbackText && rating) {
-                feedbackMessage.textContent = 'Thank you for your feedback, ' + name + '!';
-                feedbackMessage.style.color = 'green';
-
-                // Optionally send the feedback to a server via an API
-                // submitFeedback(name, email, feedbackType, feedbackText, rating);
-
-                feedbackForm.reset();
-            } else {
-                feedbackMessage.textContent = 'Please fill in all fields!';
-                feedbackMessage.style.color = 'red';
-            }
-        });
-
-        // Function to handle API submission (Optional)
-        function submitFeedback(name, email, feedbackType, feedbackText, rating) {
-            const data = {
-                name: name,
-                email: email,
-                feedbackType: feedbackType,
-                feedback: feedbackText,
-                rating: rating
-            };
-
-            fetch('/submit-feedback', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    feedbackMessage.textContent = 'Thank you for your feedback!';
-                    feedbackMessage.style.color = 'green';
-                    feedbackForm.reset();
-                })
-                .catch(error => {
-                    feedbackMessage.textContent = 'Error submitting feedback. Please try again later.';
-                    feedbackMessage.style.color = 'red';
-                });
-        }
-
-        // Updated FAQ toggle functionality
         $(document).ready(function () {
+            // All your existing JavaScript code goes here
+
+            // Authentication Check
+            const session = window.localStorage.getItem("session");
+
+            if (session) {
+                $('#wiki-feature').show(); // Show APSIT-Wiki if authenticated
+                $('#logout-btn').show();   // Show logout button
+                $('#profile-btn').hide();   // Hide "Student Login"
+            } else {
+                $('#wiki-feature').hide(); // Hide APSIT-Wiki if not authenticated
+                $('#logout-btn').hide();   // Hide logout button
+                $('#profile-btn').show(); // Show "Student Login"
+            }
+
+            // Logout Function
+            window.logout = function () {
+                window.localStorage.removeItem("session");
+                window.location.href = "signin.html";
+            }
+
+            // Smooth Scroll Functions
+            window.scrollToFeatures = function () {
+                $("#features")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            window.scrollToFaq = function () {
+                $("#faq1")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            window.scrollToFeedback = function () {
+                $("#feedback-form")[0].scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+
+
+            // Updated FAQ toggle functionality
             $('#faqAccordion').on('show.bs.collapse', function (e) {
+                console.log('Showing collapse', e.target.id);
                 $(e.target).prev('.card-header').find('.btn-link').addClass('active');
             });
 
             $('#faqAccordion').on('hide.bs.collapse', function (e) {
+                console.log('Hiding collapse', e.target.id);
                 $(e.target).prev('.card-header').find('.btn-link').removeClass('active');
             });
 
             $('.btn-link').on('click', function (e) {
+                console.log('Button clicked', this.dataset.target);
                 if ($(this).hasClass('active')) {
+                    console.log('Button is active, preventing default');
                     e.preventDefault();
                     e.stopPropagation();
                     $($(this).data('target')).collapse('hide');
                 }
             });
-        });
 
-        // Add this code after the existing chatbot functionality code
+            // Chatbot Functionality
+            const chatbotContainer = document.getElementById("chatbot-container");
+            const chatbotToggler = document.getElementById("chatbot-toggler");
+            const closeBtn = document.getElementById("close-btn");
+            const chatbox = document.getElementById("chatbox");
+            const userMessageElement = document.getElementById("user-message");
+            const sendBtn = document.getElementById("send-btn");
+            const recommendedQuestions = document.getElementById("recommended-questions");
+            const refreshBtn = document.getElementById("refresh-btn");
 
-        const chatBody = document.querySelector('.chat-body');
+            const questionsSet = [
+                "Where is the canteen?",
+                "Where can I find the stationary shop?",
+                "Where is the IT faculty room?",
+                "How do I reach the hardware workshop?",
+                "Where is the cafeteria located?",
+                "Where are the nearest restrooms?",
+                "Where is the IT Head's room?",
+                "How do I find the main entrance?",
+                "Is there an elevator nearby?",
+                "How can I reach the library?",
+                "Where is the seminar hall?",
+                "How do I get to the reception?",
+                "Where is the principal's office?",
+                "Where can I find boys' common room?",
+                "How do I reach the physics lab?",
+                "Where is room 304b?",
+                "How can I reach the examination cell?",
+                "Where is the music room?",
+                "How do I access Wi-Fi on campus?",
+                "Where is the outdoor seating area?"
+            ];
 
-        chatBody.addEventListener('wheel', (e) => {
-            const { scrollTop, scrollHeight, clientHeight } = chatBody;
-            
-            // Check if we're at the top or bottom of the chat body
-            if (
-                (scrollTop === 0 && e.deltaY < 0) || 
-                (scrollTop + clientHeight >= scrollHeight && e.deltaY > 0)
-            ) {
+            const renderQuestions = () => {
+                recommendedQuestions.innerHTML = "";
+                const shuffled = [...questionsSet].sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, 3);
+                selected.forEach((question) => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = question;
+                    listItem.addEventListener("click", () => sendMessage(question));
+                    recommendedQuestions.appendChild(listItem);
+                });
+            };
+
+            const sendMessage = (message) => {
+                if (!message) return;
+
+                const outgoingChat = document.createElement("li");
+                outgoingChat.classList.add("chat", "outgoing");
+                outgoingChat.innerHTML = `<p>${message}</p>`;
+                chatbox.appendChild(outgoingChat);
+
+                const incomingChat = document.createElement("li");
+                incomingChat.classList.add("chat", "incoming");
+                incomingChat.innerHTML = `<p>Let me check that for you...</p>`;
+                chatbox.appendChild(incomingChat);
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+
+                setTimeout(() => {
+                    const botResponse = generateBotResponse(message.toLowerCase());
+                    incomingChat.querySelector("p").textContent = botResponse;
+                }, 1000);
+            };
+
+            const generateBotResponse = (message) => {
+                const responses = {
+                    hello: "Hello! How can I assist you today?",
+                    "where is the canteen?":
+                        "Navigate to the ground floor, enter your current location, and select 'Canteen' as your destination.",
+                    "where can i find the stationary shop?":
+                        "Go to the ground floor, input your location, and choose 'Stationary' as your destination.",
+                    "where is the it faculty room?":
+                        "Select your current location and set '304D (IT Faculty Room)' as your destination.",
+                    "how do i reach the hardware workshop for first-year students?":
+                        "Head to the basement or parking area, enter your location, and mark 'Workshop-1' as your destination.",
+                    "where is the cafeteria located?":
+                        "Set your destination to 'Cafeteria-1/-2' and follow the provided directions.",
+                    "where are the nearest restrooms?":
+                        "Mark 'Restroom' as your destination and follow the directions provided.",
+                    "where is the it head of department's room?":
+                        "Scan for the nearest room, select '318D' as your destination, and follow the blue arrow.",
+                    "how do i find the main entrance?":
+                        "The main entrance is indicated by a blue arrow.",
+                    "is there an elevator nearby?":
+                        "Select the elevator option and follow the blue path to locate the nearest elevator.",
+                    "how can i reach the library?":
+                        "Enter your current location and set your destination to 'Library,' then follow the arrow.",
+                    "where is the seminar hall?":
+                        "Select your destination and click the start button to follow the designated path.",
+                    "how do i get to the reception?":
+                        "Mark 'Reception' as your destination and follow the path outlined.",
+                    "where is the principal room?":
+                        "Set your destination to 'Principal Room,' click the start button, and follow the designated path.",
+                    "where can i find boys' common room?":
+                        "Enter your starting location and set the destination to 'Boys' Common Room,' then follow the path.",
+                    "how do i reach the physics lab?":
+                        "Scan for the nearest room, select 'Physics Lab,' and follow the blue arrow.",
+                    "where is room 304b?":
+                        "Scan for the nearest room, select '304B,' and follow the blue arrow.",
+                    "how can i reach the examination cell?":
+                        "Enter your current location, mark 'Examination Cell' as your destination, and follow the arrow.",
+                    "where is the music room?":
+                        "Enter your current location, set your destination to 'Music Room,' and follow the provided path.",
+                    "how do i report an issue or provide feedback?":
+                        "You can report issues or provide feedback at the reception desk or by using the feedback form available on the website.",
+                    "how do i access wi-fi on campus?":
+                        "Wi-Fi is available throughout the campus. Connect to the network 'Campus Wi-Fi' and use your student credentials to log in.",
+                    "where is the outdoor seating area?":
+                        "The outdoor seating area is located in front of the ground floor cafeteria. Follow the path marked 'Cafeteria 2.'",
+                };
+                return responses[message.toLowerCase()] || "Please visit the Reception";
+            };
+
+            sendBtn.addEventListener("click", () => {
+                const userMessage = userMessageElement.value.trim();
+                sendMessage(userMessage);
+                userMessageElement.value = "";
+            });
+
+            userMessageElement.addEventListener("keypress", (e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendBtn.click();
+                }
+            });
+
+            chatbotToggler.addEventListener("click", () => {
+                if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
+                    chatbotContainer.style.display = "flex";
+                    renderQuestions(); // Add this line
+                } else {
+                    chatbotContainer.style.display = "none";
+                }
+            });
+
+            closeBtn.addEventListener("click", () => {
+                chatbotContainer.style.display = "none";
+            });
+
+            refreshBtn.addEventListener("click", renderQuestions);
+
+            renderQuestions();
+
+            // Feedback Form Handling
+            const feedbackForm = document.getElementById('feedback-form');
+            const feedbackMessage = document.getElementById('feedback-message');
+
+            feedbackForm.addEventListener('submit', function (e) {
                 e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const feedbackType = document.getElementById('feedback-type').value;
+                const feedbackText = document.getElementById('feedback').value.trim();
+                const rating = document.getElementById('rating').value;
+
+                if (name && email && feedbackType && feedbackText && rating) {
+                    feedbackMessage.textContent = 'Thank you for your feedback, ' + name + '!';
+                    feedbackMessage.style.color = 'green';
+
+                    // Optionally send the feedback to a server via an API
+                    // submitFeedback(name, email, feedbackType, feedbackText, rating);
+
+                    feedbackForm.reset();
+                } else {
+                    feedbackMessage.textContent = 'Please fill in all fields!';
+                    feedbackMessage.style.color = 'red';
+                }
+            });
+
+            // Function to handle API submission (Optional)
+            function submitFeedback(name, email, feedbackType, feedbackText, rating) {
+                const data = {
+                    name: name,
+                    email: email,
+                    feedbackType: feedbackType,
+                    feedback: feedbackText,
+                    rating: rating
+                };
+
+                fetch('/submit-feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        feedbackMessage.textContent = 'Thank you for your feedback!';
+                        feedbackMessage.style.color = 'green';
+                        feedbackForm.reset();
+                    })
+                    .catch(error => {
+                        feedbackMessage.textContent = 'Error submitting feedback. Please try again later.';
+                        feedbackMessage.style.color = 'red';
+                    });
             }
-        }, { passive: false });
+
+
+            
+
+            // Chatbot scroll functionality
+            const chatBody = $('.chat-body');
+            if (chatBody.length) {
+                chatBody.on('wheel', function (e) {
+                    const scrollTop = this.scrollTop;
+                    const scrollHeight = this.scrollHeight;
+                    const clientHeight = this.clientHeight;
+
+                    if ((scrollTop === 0 && e.originalEvent.deltaY < 0) ||
+                        (scrollTop + clientHeight >= scrollHeight && e.originalEvent.deltaY > 0)) {
+                        e.preventDefault();
+                    }
+                });
+            }
+        });
     </script>
 
 </body>
