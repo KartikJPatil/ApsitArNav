@@ -51,11 +51,18 @@
         }
 
         .navbar-toggler {
-            border: none;
+            border-color: rgba(255,255,255,.5);
         }
 
         .navbar-toggler-icon {
-            background-color: white;
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        }
+
+        @media (max-width: 991px) {
+            .navbar-nav {
+                background-color: rgba(30, 30, 47, 0.9);
+                padding: 10px;
+            }
         }
 
         .btn-light {
@@ -427,6 +434,10 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            nav.navbar .navbar-brand img {
+                max-width: 60px;
+            }
         }
 
 
@@ -489,6 +500,28 @@
 
         .card-header .btn-link.active {
             color: #007bff;
+        }
+
+        @media (max-width: 991px) {
+            #navbarNav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1e1e2f;
+                padding: 10px;
+                z-index: 1000;
+            }
+            #navbarNav.show {
+                display: block !important;
+            }
+            .dropdown-menu {
+                background-color: transparent;
+                border: none;
+            }
+            .dropdown-item {
+                color: #f4f4f9;
+            }
         }
     </style>
 </head>
@@ -1028,8 +1061,6 @@
             }
 
 
-            
-
             // Chatbot scroll functionality
             const chatBody = $('.chat-body');
             if (chatBody.length) {
@@ -1044,6 +1075,44 @@
                     }
                 });
             }
+
+            // Add this inside your $(document).ready(function() { ... });
+            $('.navbar-nav>li>a').on('click', function(){
+                $('.navbar-collapse').collapse('hide');
+            });
+
+            $('.dropdown-menu a').on('click', function(){
+                $('.navbar-collapse').collapse('hide');
+            });
+
+            // Navbar toggle functionality
+            $('.navbar-toggler').on('click', function(e) {
+                e.stopPropagation(); // Prevent event from bubbling up
+                $('#navbarNav').toggleClass('show');
+            });
+
+            // Close navbar when clicking outside
+            $(document).on('click', function(event) {
+                var clickover = $(event.target);
+                var _opened = $('#navbarNav').hasClass('show');
+                if (_opened === true && !clickover.hasClass('navbar-toggler') && !clickover.closest('#navbarNav').length) {
+                    $('#navbarNav').removeClass('show');
+                }
+            });
+
+            // Close navbar when a nav item is clicked
+            $('.nav-link, .dropdown-item').on('click', function() {
+                $('#navbarNav').removeClass('show');
+            });
+
+            // Prevent dropdown from closing immediately on mobile
+            $('.dropdown-toggle').on('click', function(e) {
+                if ($(window).width() < 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(this).next('.dropdown-menu').toggleClass('show');
+                }
+            });
         });
     </script>
 
