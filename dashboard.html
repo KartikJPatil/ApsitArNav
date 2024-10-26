@@ -857,14 +857,13 @@
             });
 
             // Chatbot Functionality
-            const chatbotContainer = document.getElementById("chatbot-container");
-            const chatbotToggler = document.getElementById("chatbot-toggler");
-            const closeBtn = document.getElementById("close-btn");
-            const chatbox = document.getElementById("chatbox");
-            const userMessageElement = document.getElementById("user-message");
-            const sendBtn = document.getElementById("send-btn");
-            const recommendedQuestions = document.getElementById("recommended-questions");
-            const refreshBtn = document.getElementById("refresh-btn");
+            const chatbotContainer = $("#chatbot-container");
+            const chatbotToggler = $("#chatbot-toggler");
+            const chatbox = $("#chatbox");
+            const userMessageElement = $("#user-message");
+            const sendBtn = $("#send-btn");
+            const recommendedQuestions = $("#recommended-questions");
+            const refreshBtn = $("#refresh-btn");
 
             const questionsSet = [
                 "Where is the canteen?",
@@ -890,115 +889,86 @@
             ];
 
             const renderQuestions = () => {
-                recommendedQuestions.innerHTML = "";
+                recommendedQuestions.empty();
                 const shuffled = [...questionsSet].sort(() => 0.5 - Math.random());
                 const selected = shuffled.slice(0, 3);
                 selected.forEach((question) => {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = question;
-                    listItem.addEventListener("click", () => sendMessage(question));
-                    recommendedQuestions.appendChild(listItem);
+                    const listItem = $("<li>").text(question);
+                    listItem.on("click", () => sendMessage(question));
+                    recommendedQuestions.append(listItem);
                 });
             };
 
             const sendMessage = (message) => {
                 if (!message) return;
 
-                const outgoingChat = document.createElement("li");
-                outgoingChat.classList.add("chat", "outgoing");
-                outgoingChat.innerHTML = `<p>${message}</p>`;
-                chatbox.appendChild(outgoingChat);
+                const outgoingChat = $("<li>").addClass("chat outgoing").html(`<p>${message}</p>`);
+                chatbox.append(outgoingChat);
 
-                const incomingChat = document.createElement("li");
-                incomingChat.classList.add("chat", "incoming");
-                incomingChat.innerHTML = `<p>Let me check that for you...</p>`;
-                chatbox.appendChild(incomingChat);
+                const incomingChat = $("<li>").addClass("chat incoming").html(`<p>Let me check that for you...</p>`);
+                chatbox.append(incomingChat);
 
-                chatbox.scrollTop = chatbox.scrollHeight;
+                chatbox.scrollTop(chatbox[0].scrollHeight);
 
                 setTimeout(() => {
                     const botResponse = generateBotResponse(message.toLowerCase());
-                    incomingChat.querySelector("p").textContent = botResponse;
+                    incomingChat.find("p").text(botResponse);
                 }, 1000);
             };
 
             const generateBotResponse = (message) => {
                 const responses = {
-                    hello: "Hello! How can I assist you today?",
-                    "where is the canteen?":
-                        "Navigate to the ground floor, enter your current location, and select 'Canteen' as your destination.",
-                    "where can i find the stationary shop?":
-                        "Go to the ground floor, input your location, and choose 'Stationary' as your destination.",
-                    "where is the it faculty room?":
-                        "Select your current location and set '304D (IT Faculty Room)' as your destination.",
-                    "how do i reach the hardware workshop for first-year students?":
-                        "Head to the basement or parking area, enter your location, and mark 'Workshop-1' as your destination.",
-                    "where is the cafeteria located?":
-                        "Set your destination to 'Cafeteria-1/-2' and follow the provided directions.",
-                    "where are the nearest restrooms?":
-                        "Mark 'Restroom' as your destination and follow the directions provided.",
-                    "where is the it head of department's room?":
-                        "Scan for the nearest room, select '318D' as your destination, and follow the blue arrow.",
-                    "how do i find the main entrance?":
-                        "The main entrance is indicated by a blue arrow.",
-                    "is there an elevator nearby?":
-                        "Select the elevator option and follow the blue path to locate the nearest elevator.",
-                    "how can i reach the library?":
-                        "Enter your current location and set your destination to 'Library,' then follow the arrow.",
-                    "where is the seminar hall?":
-                        "Select your destination and click the start button to follow the designated path.",
-                    "how do i get to the reception?":
-                        "Mark 'Reception' as your destination and follow the path outlined.",
-                    "where is the principal room?":
-                        "Set your destination to 'Principal Room,' click the start button, and follow the designated path.",
-                    "where can i find boys' common room?":
-                        "Enter your starting location and set the destination to 'Boys' Common Room,' then follow the path.",
-                    "how do i reach the physics lab?":
-                        "Scan for the nearest room, select 'Physics Lab,' and follow the blue arrow.",
-                    "where is room 304b?":
-                        "Scan for the nearest room, select '304B,' and follow the blue arrow.",
-                    "how can i reach the examination cell?":
-                        "Enter your current location, mark 'Examination Cell' as your destination, and follow the arrow.",
-                    "where is the music room?":
-                        "Enter your current location, set your destination to 'Music Room,' and follow the provided path.",
-                    "how do i report an issue or provide feedback?":
-                        "You can report issues or provide feedback at the reception desk or by using the feedback form available on the website.",
-                    "how do i access wi-fi on campus?":
-                        "Wi-Fi is available throughout the campus. Connect to the network 'Campus Wi-Fi' and use your student credentials to log in.",
-                    "where is the outdoor seating area?":
-                        "The outdoor seating area is located in front of the ground floor cafeteria. Follow the path marked 'Cafeteria 2.'",
+                    "where is the canteen?": "Navigate to the ground floor, enter your current location, and select 'Canteen' as your destination.",
+                    "where can i find the stationary shop?": "Go to the ground floor, input your location, and choose 'Stationary' as your destination.",
+                    "where is the it faculty room?": "Select your current location and set '304D (IT Faculty Room)' as your destination.",
+                    "how do i reach the hardware workshop for first-year students?": "Head to the basement or parking area, enter your location, and mark 'Workshop-1' as your destination.",
+                    "where is the cafeteria located?": "Set your destination to 'Cafeteria-1/-2' and follow the provided directions.",
+                    "where are the nearest restrooms?": "Mark 'Restroom' as your destination and follow the directions provided.",
+                    "where is the it head of department's room?": "Scan for the nearest room, select '318D' as your destination, and follow the blue arrow.",
+                    "how do i find the main entrance?": "The main entrance is indicated by a blue arrow.",
+                    "is there an elevator nearby?": "Select the elevator option and follow the blue path to locate the nearest elevator.",
+                    "how can i reach the library?": "Enter your current location and set your destination to 'Library,' then follow the arrow.",
+                    "where is the seminar hall?": "Select your destination and click the start button to follow the designated path.",
+                    "how do i get to the reception?": "Mark 'Reception' as your destination and follow the path outlined.",
+                    "where is the principal room?": "Set your destination to 'Principal Room,' click the start button, and follow the designated path.",
+                    "where can i find boys' common room?": "Enter your starting location and set the destination to 'Boys' Common Room,' then follow the path.",
+                    "how do i reach the physics lab?": "Scan for the nearest room, select 'Physics Lab,' and follow the blue arrow.",
+                    "where is room 304b?": "Scan for the nearest room, select '304B,' and follow the blue arrow.",
+                    "how can i reach the examination cell?": "Enter your current location, mark 'Examination Cell' as your destination, and follow the arrow.",
+                    "where is the music room?": "Enter your current location, set your destination to 'Music Room,' and follow the provided path.",
+                    "how do i report an issue or provide feedback?": "You can report issues or provide feedback at the reception desk or by using the feedback form available on the website.",
+                    "how do i access wi-fi on campus?": "Wi-Fi is available throughout the campus. Connect to the network 'Campus Wi-Fi' and use your student credentials to log in.",
+                    "where is the outdoor seating area?": "The outdoor seating area is located in front of the ground floor cafeteria. Follow the path marked 'Cafeteria 2.'",
                 };
-                return responses[message.toLowerCase()] || "Please visit the Reception";
+                return responses[message] || "Please visit the Reception for more information.";
             };
 
-            sendBtn.addEventListener("click", () => {
-                const userMessage = userMessageElement.value.trim();
+            sendBtn.on("click", () => {
+                const userMessage = userMessageElement.val().trim();
                 sendMessage(userMessage);
-                userMessageElement.value = "";
+                userMessageElement.val("");
             });
 
-            userMessageElement.addEventListener("keypress", (e) => {
+            userMessageElement.on("keypress", (e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
                     sendBtn.click();
                 }
             });
 
-            chatbotToggler.addEventListener("click", () => {
-                if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
-                    chatbotContainer.style.display = "flex";
-                    renderQuestions(); // Add this line
-                } else {
-                    chatbotContainer.style.display = "none";
+            chatbotToggler.on("click", () => {
+                chatbotContainer.toggle();
+                if (chatbotContainer.is(":visible")) {
+                    renderQuestions();
                 }
             });
 
-            closeBtn.addEventListener("click", () => {
-                chatbotContainer.style.display = "none";
+            refreshBtn.on("click", () => {
+                console.log("Refresh button clicked"); // Debug log
+                renderQuestions();
             });
 
-            refreshBtn.addEventListener("click", renderQuestions);
-
+            // Initial render of questions
             renderQuestions();
 
             // Feedback Form Handling
